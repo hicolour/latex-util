@@ -239,6 +239,7 @@
 \newcommand*{\blogpage}[1]{\def\@blogpage{#1}}
 
 \newcommand*{\xlink}[2]{{\color{color1}\homepagesymbol{\href{#1}{#2}}}}
+\newcommand*{\slink}[2]{{\color{color1}\href{#1}{#2}}}
 
 \newcommand*{\xtag}[1]{{\colorbox{yellow}{{#1}}}}
 
@@ -287,7 +288,7 @@
 % usage: \moderncvstyle{<style variant name>}
 \newcommand*{\moderncvstyle}[1]{
   \RequirePackage{moderncvstyle#1}}
-  
+
 % loads a color scheme
 % usage: \moderncvcolor{<color scheme name>}
 \newcommand*{\moderncvcolor}[1]{
@@ -325,6 +326,8 @@
 \newcommand*{\subsectionfont}{}
 \newcommand*{\hintfont}{}
 \newcommand*{\pagenumberfont}{\addressfont\itshape}
+
+
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont#1}}
@@ -367,7 +370,7 @@
 
 % makes a resume line with a header and a corresponding text
 % usage: \cvitem[spacing]{header}{text}
-\newcommand*{\cvitem}[3][.25em]{}
+\newcommand*{\cvitem}[2][.25em]{}
 
 % makes a resume line 2 headers and their corresponding text
 % usage: \cvdoubleitem[spacing]{header1}{text1}{header2}{text2}
@@ -392,9 +395,10 @@
 % makes a generic hyperlink
 % usage: \link[optional text]{link}
 \newcommand*{\link}[2][]{%
+\textcolor{color1}{
   \ifthenelse{\equal{#1}{}}%
     {\href{#2}{#2}}%
-    {\href{#2}{#1}}}
+    {\href{#2}{#1}}}}
 
 % makes a http hyperlink
 % usage: \httplink[optional text]{link}
@@ -472,10 +476,11 @@
     \cvitem{}{%
       \begin{tabular}{\cvcolumns@def}%
         \if@cvcolumns@head@empty\else%
-          \cvcolumns@head\\[-.8em]%
+          % \cvcolumns@head\\[-.8em]%
           {\color{color1}\rule{\maincolumnwidth}{.25pt}}\\\fi%
-        \cvcolumns@content%
-      \end{tabular}}}
+      \fontsize{8}{8}\upshape  \cvcolumns@content%
+      \end{tabular}
+      }}
 
 % cvcolumn command, to create a column inside a cvcolumns environment
 % usage: \cvcolumn[width]{head}{content}

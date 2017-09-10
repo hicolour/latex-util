@@ -40,8 +40,10 @@
 %                resume style definition
 %-------------------------------------------------------------------------------
 % fonts
-\renewcommand*{\namefont}{\fontsize{34}{36}\upshape}
-\renewcommand*{\titlefont}{\LARGE\slshape}
+\renewcommand*{\namefont}{\fontsize{20}{20}\upshape}
+\renewcommand*{\titlefont}{\fontsize{11}{12}\upshape}
+\renewcommand*{\projecttitle}{\fontsize{10}{10}\upshape}
+% {\LARGE\slshape}
 \renewcommand*{\addressfont}{\smallslshape}
 \renewcommand*{\quotefont}{\large\slshape}
 \renewcommand*{\sectionfont}{\Large}
@@ -143,7 +145,7 @@
   % optional quote
   \ifthenelse{\isundefined{\@quote}}%
     {}%
-    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{{\color{color2}\@quote}}\end{minipage}\\[2.5em]}}%
   \par}% to avoid weird spacing bug at the first section if no blank line is left after \makecvtitle
 
 \newlength{\baseletterheight}
@@ -176,6 +178,13 @@
   \end{tabular}%
   \par\addvspace{#1}}
 
+
+  \renewcommand*{\cvitem}[3][.25em]{%
+    \begin{tabular}{@{}p{\hintscolumnwidth}@{\hspace{\separatorcolumnwidth}}p{\maincolumnwidth}@{}}%
+      \raggedleft\hintstyle{#2} &{#3}%
+    \end{tabular}%
+    \par\addvspace{#1}}
+
 \renewcommand*{\cvdoubleitem}[5][.25em]{%
  \cvitem[#1]{#2}{%
    \begin{minipage}[t]{\doubleitemmaincolumnwidth}#3\end{minipage}%
@@ -194,19 +203,36 @@
     {}%
     {\listitemsymbol\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
 
+
+\renewcommand*{\project}[3]{%
+ \begin{minipage}{\textwidth}{%
+  {{\projecttitle{{\scshape{#1}}}}}
+  \newline \newline
+  {\small{#2}}
+  \newline
+  {#3}}
+  \end{minipage}\\[1em]
+ }
+
+
 \renewcommand*{\cventry}[8][.25em]{%
-  \cvitem[#1]{\small#2}{%
-    \small{#4} {\color{color2}(#5, #6)}\newline
-    {\color{color1}{#3}}%
+  \cvitem[#1]
+  {\small#2}{%
+  {\scshape{#4}}
+    %Company name
+    \newline{
+    {\textbf{#3}}\hfill {\color{color2}#5, #6}} %Company Role
+    \newline
     %\ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
     %\ifthenelse{\equal{#5}{}}{}{, #5}%
     %\ifthenelse{\equal{#6}{}}{}{, #6}%
     \ifx&#7&%
       \else{\newline{}\begin{minipage}[t]{\linewidth}{\footnotesize#7{\vspace{2mm} \footnotesize#8}}\end{minipage}}
       %\else{\newline{}{\linewidth}{\footnotesize#7{\footnotesize#8}}}
-      \newline{}\newline{}
-      {\color{color2}\hdashrule{14cm}{0.9pt}{0.9pt}}
-      \fi}}
+      \newline{}
+      % {\color{color2}\hdashrule{14.2cm}{0.4pt}{0.4pt}}
+      \fi
+      }}
 
 \renewcommand*{\cventryts}[4][.25em]{%
   \cvitem[]{\small#2}{%
@@ -214,7 +240,7 @@
     %\ifthenelse{\equal{#4}{}}{}{, {\slshape#4}}%
     %\ifthenelse{\equal{#5}{}}{}{, #5}%
     %\ifthenelse{\equal{#6}{}}{}{, #6}%
-    {\color{color2}\hdashrule{14cm}{0.9pt}{0.9pt}}
+    % {\color{color2}\hdashrule{14cm}{0.9pt}{0.9pt}}
     }}
 
 %\hdashrule[0.5ex]{4cm}{1pt}{1pt}
